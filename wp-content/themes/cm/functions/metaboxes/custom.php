@@ -1,7 +1,7 @@
 <?php
 class CustomMetaBox
 {
-    const META_KEY = 'tm_custom_metabox';
+    const META_KEY = 'tm_custom_metabox'; //db key
     public static function register()
     {
         add_action('add_meta_boxes', [self::class, 'add']);
@@ -16,11 +16,11 @@ class CustomMetaBox
     public static function render()
     {
 ?>
-            <span class="components-checkbox-control__input-container">
-                <input type="hidden" value="0" name="<?= self::META_KEY ?>">
-                <input class="components-checkbox-control__input" type="checkbox" value="1" name="<?= self::META_KEY ?>" id="<?= self::META_KEY ?>">
-            </span>
-            <label class="components-checkbox-control__label" for="<?= self::META_KEY ?>">Custom metabox</label>
+        <span class="components-checkbox-control__input-container">
+            <input type="hidden" value="0" name="<?= self::META_KEY ?>">
+            <input type="checkbox" value="1" name="<?= self::META_KEY ?>" id="tm_custom_metabox_1">
+        </span>
+        <label class="components-checkbox-control__label" for="tm_custom_metabox_1">Custom metabox</label>
 <?php
     }
 
@@ -35,4 +35,5 @@ class CustomMetaBox
         }
     }
 }
+CustomMetaBox::register();
 ?>

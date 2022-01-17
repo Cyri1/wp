@@ -1,5 +1,31 @@
 <?php
 
+add_action('init', 'tm_init');
+add_action('after_setup_theme', 'tm_supports');
+add_action('wp_enqueue_scripts', 'tm_register_assets');
+add_action('admin_enqueue_scripts', 'tm_register_admin_assets');
+
+function tm_init()
+{
+    register_taxonomy('custom_taxonomy', 'post', [
+        'labels' => [
+            'name' => 'Custom Taxonomy',
+            'singular_name' => 'Custom Taxonomy',
+            'plural_name' => 'Custom Taxonomies',
+            'search_items' => 'Rechercher Taxonomy',
+            'all_items' => 'Toutes les Taxonomies',
+            'edit_item' => 'Editer la Taxonomy',
+            'update_item' => 'Mettre à jour la Taxonomy',
+            'add_new_item' => 'Ajouter une nouvelle Taxonomy (item)',
+            'new_item_name' => 'Ajouter une nouvelle Taxonomy (name)',
+            'menu_name' => 'Custom Taxonomy',
+        ],
+        'show_in_rest' => true,
+        'hierarchical' => true,
+        'show_admin_column' => true,
+    ]);
+}
+
 function tm_supports()
 {
     add_theme_support('title-tag');
@@ -19,46 +45,19 @@ function tm_register_assets()
     wp_enqueue_script('bootstrap');
 }
 
-function tm_custom_excerpt_length($length)
+function tm_register_admin_assets()
 {
-    return 150;
+    wp_register_script('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr', [], false, true);
+    wp_register_style('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css');
+    wp_enqueue_style('flatpickr');
+    wp_enqueue_script('tm_custom_admin_js', get_template_directory_uri() . '/assets/custom-admin.js', ['flatpickr'], false, true);
+    wp_enqueue_style('tm_custom_admin_css', get_template_directory_uri() . '/assets/custom-admin.css');
 }
 
-function tm_menu_class($classes)
-{
-    $classes[] = 'nav-item';
-    return $classes;
-}
-
-function tm_menu_link_class($attr)
-{
-    $attr['class'] = 'nav-link';
-    return $attr;
-}
-
-function tm_pagination()
-{
-    $pages = paginate_links(['type' => 'array']);
-    if (!$pages) {
-        return;
-    }
-    echo '<nav aria-label="Pagination">';
-    echo '<ul class="pagination pagination-sm">';
-    foreach ($pages as $page) {
-        $active = strpos($page, 'current') ? 'active' : '';
-        echo '<li class="page-item '. $active .'">';
-        echo str_replace('page-numbers', 'page-link', $page);
-        echo '</li>';
-    }
-    echo '</ul>';
-    echo '</nav>';
-}
-
-add_action('after_setup_theme', 'tm_supports');
-add_action('wp_enqueue_scripts', 'tm_register_assets');
-add_filter('excerpt_length', 'tm_custom_excerpt_length', 999);
-add_filter('nav_menu_css_class', 'tm_menu_class');
-add_filter('nav_menu_link_attributes', 'tm_menu_link_class');
-
-require_once('metaboxes/custom.php');
-CustomMetaBox::register();  
+require_once('functions/navbar/navbar.php');
+require_once('functions/excerpt/excerpt.php');
+require_once('functions/metaboxes/custom.php');
+require_once('functions/settings-options/custom.php');
+require_once('functions/pagination/pagination.php');
+require_once('functions/filter-posts/filter.php');
+require_once('functions/widgets/widgets.php');

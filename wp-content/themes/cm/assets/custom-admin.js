@@ -1,0 +1,1 @@
+jQuery(".tm_flatpickr").flatpickr({});
