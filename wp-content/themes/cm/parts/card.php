@@ -2,13 +2,11 @@
     <div class="mx-3">
         <h4 class="card-title mt-3"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h4>
         <?php $taxonomies = get_the_terms(get_the_ID(), 'custom_taxonomy') ? get_the_terms(get_the_ID(), 'custom_taxonomy') : []; ?>
-        <ul class="nav nav-pills">
-            <?php foreach ($taxonomies as $taxonomy) : ?>
-                <li>
-                    <a href="<?= get_term_link($taxonomy) ?>" class="badge badge-success m-1"><?= $taxonomy->name ?></a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php foreach ($taxonomies as $taxonomy) : ?>
+            <a href="<?= get_term_link($taxonomy) ?>"><span class="badge rounded-pill bg-success"><?= $taxonomy->name ?></span></a>
+
+            
+        <?php endforeach; ?>
     </div>
     <div class="row m-0">
         <?php if (has_post_thumbnail()) : ?>

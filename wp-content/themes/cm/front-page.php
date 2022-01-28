@@ -1,7 +1,8 @@
 <?php get_header(); ?>
 
 <div class="row">
-    <div class="col-md-8 blog-main">
+
+    <div class="col-md blog-main">
         <div class="blog-post">
             <h2 class="blog-post-title">Sample blog post</h2>
             <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
@@ -67,9 +68,18 @@
         </nav>
 
     </div>
-    <aside class="col-md-4 blog-sidebar">
-        <?= get_sidebar('homepage') ?>
-    </aside>
+
+    <?php if (is_active_sidebar('homepage')) : ?>
+        <?php $allWidgets = wp_get_sidebars_widgets() ?>
+        <?php if ($allWidgets['homepage']) : ?>
+            <aside class="col-md-3 blog-sidebar border p-4 mt-5">
+                <ul class="list-unstyled">
+                <?= get_sidebar('homepage') ?>
+                </ul>
+            </aside>
+        <?php endif; ?>
+    <?php endif; ?>
+
 </div>
 
 <?php get_footer(); ?>

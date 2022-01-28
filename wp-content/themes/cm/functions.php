@@ -31,14 +31,12 @@ function tm_supports()
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     add_theme_support('menus');
-    register_nav_menu('header', 'Entête du menu');
 }
 
 function tm_register_assets()
 {
-    wp_register_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css', []);
-    wp_register_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js', ['jquery', 'popper'], false, true);
-    wp_register_script('popper', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js', [], false, true);
+    wp_register_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', []);
+    wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', ['jquery'], false, true);
     wp_deregister_script('jquery');
     wp_register_script('jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', [], false, true);
     wp_enqueue_style('bootstrap');
@@ -50,8 +48,8 @@ function tm_register_admin_assets()
     wp_register_script('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr', [], false, true);
     wp_register_style('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css');
     wp_enqueue_style('flatpickr');
-    wp_enqueue_script('tm_custom_admin_js', get_template_directory_uri() . '/assets/custom-admin.js', ['flatpickr'], false, true);
-    wp_enqueue_style('tm_custom_admin_css', get_template_directory_uri() . '/assets/custom-admin.css');
+    wp_enqueue_script('tm_custom_admin_js', get_template_directory_uri() . '/js/custom-admin.js', ['flatpickr'], false, true);
+    wp_enqueue_style('tm_custom_admin_css', get_template_directory_uri() . '/css/custom-admin.css');
 }
 
 require_once('functions/navbar/navbar.php');
@@ -60,4 +58,9 @@ require_once('functions/metaboxes/custom.php');
 require_once('functions/settings-options/custom.php');
 require_once('functions/pagination/pagination.php');
 require_once('functions/filter-posts/filter.php');
-require_once('functions/widgets/widgets.php');
+require_once('functions/widgets/sidebar.php');
+require_once('functions/widgets/custom.php');
+require_once('functions/comments/comments.php');
+require_once('functions/appearance/appearance.php');
+require_once('functions/cron/cron.php');
+require_once('functions/wpdb/wpdb.php');

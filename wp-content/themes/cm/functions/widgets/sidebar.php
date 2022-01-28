@@ -1,7 +1,11 @@
 <?php 
+
+require_once 'custom.php';
+
 add_action('widgets_init', 'tm_register_widget');
 
 function tm_register_widget() {
+    register_widget(CustomWidget::class);
     register_sidebar([
         'id' => 'homepage',
         'name' => 'Sidebar Homepage',
