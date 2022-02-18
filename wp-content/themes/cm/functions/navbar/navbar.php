@@ -50,5 +50,5 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu {
 }
 
 register_nav_menus([
-	'primary' => 'Primary Navigation'
+	'primary' => 'Menu'
 ]);

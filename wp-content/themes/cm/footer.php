@@ -1,8 +1,9 @@
 </div>
-<footer>
+<footer class="mt-auto footer">
+    <div class="bg-light mt-3">
+        Footer
+    </div>
     <?php wp_footer(); ?>
-    <?= get_option('option1') ?>
-    <p>Footer</p>
 </footer>
 </body>
 
