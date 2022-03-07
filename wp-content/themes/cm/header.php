@@ -8,68 +8,70 @@
     <?php wp_head() ?>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#primaryNav" aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<body class="d-flex flex-column min-vh-100 bg-light">
+    <div class="bg-white border">
+        <nav class="container navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#primaryNav" aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="primaryNav">
-                <div class="offcanvas-header">
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <a class="navbar-brand d-none d-lg-inline-flex" href="<?= network_site_url('/') ?>">
-                        <?= get_bloginfo('name') ?>
-                    </a>
-                    <?php
-                    wp_nav_menu([
-                        'menu'              => 'primary',
-                        'theme_location'    => 'primary',
-                        'depth'             => 2,
-                        'container'            => false,
-                        'menu_class'        => 'navbar-nav justify-content-start flex-grow-1 pe-3',
-                        'fallback_cb'       => '__return_false',
-                        'walker'             => new bootstrap_5_wp_nav_menu_walker()
-                    ]);
-                    ?>
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarLogin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Mon compte
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <form class="px-4 py-3" name="loginform" id="loginform" action="<?= wp_login_url() ?>" method="post">
-                                    <div class="mb-3">
-                                        <label for="exampleDropdownFormEmail1" class="form-label">Identifiant ou e-mail :</label>
-                                        <input name="log" class="form-control" id="exampleDropdownFormEmail1">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleDropdownFormPassword1" class="form-label">Mot de passe :</label>
-                                        <input type="password" name="pwd" class="form-control" id="exampleDropdownFormPassword1" autocomplete="on">
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" name="rememberme" value="forever" class="form-check-input" id="dropdownCheck">
-                                            <input type="hidden" name="redirect_to" value="<?= home_url() ?>">
-                                            <label class="form-check-label" for="dropdownCheck">Se souvenir de moi</label>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Se connecter</button>
-                                </form>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">New around here? Sign up</a>
-                                <a class="dropdown-item" href="<?php echo esc_url(wp_lostpassword_url(get_home_url())); ?>" alt="<?php esc_attr_e('Lost Password', 'textdomain'); ?>">
-                                    <?php esc_html_e('Lost Password', 'textdomain'); ?>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="primaryNav">
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <a class="navbar-brand d-none d-lg-inline-flex" href="<?= network_site_url('/') ?>">
+                            <?= get_bloginfo('name') ?>
+                        </a>
+                        <?php
+                        wp_nav_menu([
+                            'menu'              => 'primary',
+                            'theme_location'    => 'primary',
+                            'depth'             => 2,
+                            'container'            => false,
+                            'menu_class'        => 'navbar-nav justify-content-start flex-grow-1 pe-3',
+                            'fallback_cb'       => '__return_false',
+                            'walker'             => new bootstrap_5_wp_nav_menu_walker()
+                        ]);
+                        ?>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarLogin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Mon compte
                                 </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <?php get_search_form(); ?>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <form class="px-4 py-3" name="loginform" id="loginform" action="<?= wp_login_url() ?>" method="post">
+                                        <div class="mb-3">
+                                            <label for="exampleDropdownFormEmail1" class="form-label">Identifiant ou e-mail :</label>
+                                            <input name="log" class="form-control" id="exampleDropdownFormEmail1">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleDropdownFormPassword1" class="form-label">Mot de passe :</label>
+                                            <input type="password" name="pwd" class="form-control" id="exampleDropdownFormPassword1" autocomplete="on">
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="rememberme" value="forever" class="form-check-input" id="dropdownCheck">
+                                                <input type="hidden" name="redirect_to" value="<?= home_url() ?>">
+                                                <label class="form-check-label" for="dropdownCheck">Se souvenir de moi</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                                    </form>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">New around here? Sign up</a>
+                                    <a class="dropdown-item" href="<?php echo esc_url(wp_lostpassword_url(get_home_url())); ?>" alt="<?php esc_attr_e('Lost Password', 'textdomain'); ?>">
+                                        <?php esc_html_e('Lost Password', 'textdomain'); ?>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <?php get_search_form(); ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php get_template_part('parts/failed-login'); ?>
-    </nav>
-    <div class="container bg-light">
+            <?php get_template_part('parts/failed-login'); ?>
+        </nav>
+    </div>
+    <div class="container bg-white flex-fill p-3">

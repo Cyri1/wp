@@ -9,7 +9,17 @@ if (login) {
 }
 
 jQuery('.needs-validation input').on('blur', function() {
-    if(this.id == 'username' || this.id == 'firstname' || this.id == 'lastname') {
+    if(this.id == 'firstname' || this.id == 'lastname') {
+        if (validator.isAlpha(this.value, 'fr-FR', {ignore:' \'-,'}) && validator.isLength(this.value, {min:2, max: 30})) {
+            jQuery(this).addClass('is-valid')
+            jQuery(this).removeClass('is-invalid')
+        }
+        else {
+            jQuery(this).addClass('is-invalid')
+            jQuery(this).removeClass('is-valid')
+        }
+    }
+    if(this.id == 'username') {
         if (validator.isAlphanumeric(this.value, 'fr-FR') && validator.isLength(this.value, {min:2, max: 30})) {
             jQuery(this).addClass('is-valid')
             jQuery(this).removeClass('is-invalid')
