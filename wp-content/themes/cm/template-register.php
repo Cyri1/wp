@@ -78,6 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //     'locale'                => '',
     //     'meta_input'            => array(
     //         'city' => 'Brest',
+    //         'city' => 'Brest',
+    //         'city' => 'Brest',
+    //         'city' => 'Brest',
+    //         'city' => 'Brest',
+    //         'city' => 'Brest',
     //     )
     // );
     // $user_id = wp_insert_user(wp_slash($userdata));
@@ -100,74 +105,117 @@ if (!empty($errors)) {
     <h4 class="mb-3">Créer un compte :</h4>
     <form class="needs-validation" method="post" novalidate>
         <fieldset class="my-3">
-            <h6 class="text-muted ps-3">Champs obligatoires :</h6>
             <div class="row g-3">
-                <div class="row g-2">
-                    <div class="col-md-4">
-                        <label for="firstName" class="form-label">Prénom :</label>
-                        <input type="text" value="<?= $_POST['firstname'] ?>" class="form-control" name="firstname" id="firstname" required>
-                        <div class="invalid-feedback">
-                            Champ invalide : minimum 2 caractères alphabétiques.
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="lastName" class="form-label">Nom :</label>
-                        <input type="text" class="form-control" value="<?= $_POST['lastname'] ?>" name="lastname" id="lastname" required>
-                        <div class="invalid-feedback">
-                            Champ invalide : minimum 2 caractères alphabétiques.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row g-2">
-                    <div class="col-md-6">
-                        <label for="username" class="form-label">Identifiant :</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text">@</span>
-                            <input type="text" class="form-control" value="<?= $_POST['username'] ?>" name="username" id="username" required>
+                <h6>Informations de compte : </h6>
+                <div class="row g-2 mb-2">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label for="firstName" class="form-label">Prénom :</label>
+                            <input type="text" value="<?= $_POST['firstname'] ?>" class="form-control" name="firstname" id="firstname" required>
                             <div class="invalid-feedback">
-                                Champ invalide : minimum 2 caractères alphanumériques.
+                                Champ invalide : minimum 2 caractères alphabétiques.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="lastName" class="form-label">Nom :</label>
+                            <input type="text" class="form-control" value="<?= $_POST['lastname'] ?>" name="lastname" id="lastname" required>
+                            <div class="invalid-feedback">
+                                Champ invalide : minimum 2 caractères alphabétiques.
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row g-2">
-                    <div class="col-md-5">
-                        <label for="firstName" class="form-label">Mot de passe :</label>
-                        <input type="password" class="form-control" autocomplete="off" value="<?= $_POST['password1'] ?>" name="password1" id="password1" required>
-                        <div class="invalid-feedback">
-                            Champ invalide.
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label for="username" class="form-label">Identifiant :</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">@</span>
+                                <input type="text" class="form-control" value="<?= $_POST['username'] ?>" name="username" id="username" required>
+                                <div class="invalid-feedback">
+                                    Champ invalide : minimum 2 caractères alphanumériques.
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <label for="firstName" class="form-label">Retaper votre mot de passe :</label>
-                        <input type="password" class="form-control" autocomplete="off" value="<?= $_POST['password2'] ?>" name="password2" id="password2" required>
-                        <div class="invalid-feedback">
-                            Champ invalide.
+
+                    <div class="row g-2">
+                        <div class="col-md-5">
+                            <label for="firstName" class="form-label">Mot de passe :</label>
+                            <input type="password" class="form-control" autocomplete="off" value="<?= $_POST['password1'] ?>" name="password1" id="password1" required>
+                            <div class="invalid-feedback">
+                                Le mot de passe doit contenir au minimum : une minuscule, une majuscule, un symbole et un chiffre.
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="firstName" class="form-label">Vétification de votre mot de passe :</label>
+                            <input type="password" class="form-control" autocomplete="off" value="<?= $_POST['password2'] ?>" name="password2" id="password2" required>
+                            <div class="invalid-feedback">
+                                Les mots de passe doivent être identiques.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-md-8">
+                            <label for="email" class="form-label">Email :</label>
+                            <input type="email" class="form-control" value="<?= $_POST['email'] ?>" name="email" id="email" required>
+                            <div class="invalid-feedback">
+                                L'email n'est pas valide.
+                            </div>
+                        </div>
+                    </div>
+                    <?php wp_nonce_field('user_registration', 'registration_nonce'); ?>
+                </div>
+
+                <div class="row g-2 mb-2">
+                    <h6>Informations de personelles : </h6>
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label for="city" class="form-label">Ville :</label>
+                            <input type="text" value="<?= $_POST['city'] ?>" class="form-control" name="city" id="city">
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="street" class="form-label">Rue :</label>
+                            <input type="text" value="<?= $_POST['street'] ?>" class="form-control" name="street" id="street">
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label for="phone" class="form-label">Numéro de téléphone :</label>
+                            <input type="text" value="<?= $_POST['phone'] ?>" class="form-control" name="phone" id="phone">
                         </div>
                     </div>
                 </div>
 
-                <div class="row g-2">
-                    <div class="col-md-8">
-                        <label for="email" class="form-label">Email :</label>
-                        <input type="email" class="form-control" value="<?= $_POST['email'] ?>" name="email" id="email" required>
-                        <div class="invalid-feedback">
-                            Champ invalide.
+                <div class="row g-2 mb-2">
+                    <h6>Personne à prévenir en cas de problème : </h6>
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label for="firstNameTrust" class="form-label">Prénom :</label>
+                            <input type="text" value="<?= $_POST['firstNameTrust'] ?>" class="form-control" name="firstNameTrust" id="firstNameTrust">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="lastNameTrust" class="form-label">Nom :</label>
+                            <input type="text" value="<?= $_POST['lastNameTrust'] ?>" class="form-control" name="lastNameTrust" id="lastNameTrust">
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label for="phoneTrust" class="form-label">Numéro de téléphone :</label>
+                            <input type="text" value="<?= $_POST['phoneTrust'] ?>" class="form-control" name="phoneTrust" id="phoneTrust">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="linkTrust" class="form-label">Lien de parenté :</label>
+                            <input type="text" value="<?= $_POST['linkTrust'] ?>" class="form-control" name="linkTrust" id="linkTrust">
                         </div>
                     </div>
                 </div>
-                <?php wp_nonce_field('user_registration', 'registration_nonce'); ?>
-        </fieldset>
-<br>
-        <fieldset class="my-3">
-            <h6 class="text-muted ps-3">Champs facultatifs :</h6>
-
-            <div class="col-md-4">
-                <label for="firstName" class="form-label">Ville :</label>
-                <input type="text" value="<?= $_POST['city'] ?>" class="form-control" name="city" id="city">
             </div>
 
         </fieldset>
