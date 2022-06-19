@@ -60,7 +60,7 @@
                                         <button type="submit" class="btn btn-primary">Se connecter</button>
                                     </form>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">New around here? Sign up</a>
+                                    <a class="dropdown-item" href="<?= esc_url(home_url('/creer-un-compte')) ?>">Créer un compte</a>
                                     <a class="dropdown-item" href="<?php echo esc_url(wp_lostpassword_url(get_home_url())); ?>" alt="<?php esc_attr_e('Lost Password', 'textdomain'); ?>">
                                         <?php esc_html_e('Lost Password', 'textdomain'); ?>
                                     </a>

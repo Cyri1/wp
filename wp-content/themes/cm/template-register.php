@@ -63,29 +63,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Le mot de passe doit contenir au moins huit caractères.';
     }
 
-    // $userdata = array(
-    //     'user_pass'             => $_POST['password1'],
-    //     'user_login'            => $_POST['username'],
-    //     'user_email'            => $_POST['email'],
-    //     'display_name'          => $_POST['firstname'] . ' ' . strtoupper($_POST['firstname'][0]) . '.',
-    //     'first_name'            => $_POST['firstname'],
-    //     'last_name'             => $_POST['lastname'],
-    //     'description'           => '',
-    //     'comment_shortcuts'     => 'false',
-    //     'user_registered'       => date('Y-m-d H:i:s'),
-    //     'show_admin_bar_front'  => 'false',
-    //     'role'                  => 'subscriber',
-    //     'locale'                => '',
-    //     'meta_input'            => array(
-    //         'city' => 'Brest',
-    //         'city' => 'Brest',
-    //         'city' => 'Brest',
-    //         'city' => 'Brest',
-    //         'city' => 'Brest',
-    //         'city' => 'Brest',
-    //     )
-    // );
-    // $user_id = wp_insert_user(wp_slash($userdata));
+    $userdata = array(
+        'user_pass'             => $_POST['password1'],
+        'user_login'            => $_POST['username'],
+        'user_email'            => $_POST['email'],
+        'display_name'          => $_POST['firstname'] . ' ' . strtoupper($_POST['firstname'][0]) . '.',
+        'first_name'            => $_POST['firstname'],
+        'last_name'             => $_POST['lastname'],
+        'description'           => '',
+        'comment_shortcuts'     => 'false',
+        'user_registered'       => date('Y-m-d H:i:s'),
+        'show_admin_bar_front'  => 'false',
+        'role'                  => 'subscriber',
+        'locale'                => '',
+        'meta_input'            => array(
+            'gender' => $_POST['gender'],
+            'birthday' => $_POST['birthday'],
+            'city' => $_POST['city'],
+            'street' => $_POST['street'],
+            'phone' => $_POST['phone'],
+            'firstNameTrust' => $_POST['firstNameTrust'],
+            'lastNameTrust' => $_POST['lastNameTrust'],
+            'phoneTrust' => $_POST['phoneTrust'],
+            'linkTrust' => $_POST['linkTrust'],
+            'allow-photo' => $_POST['allow-photo'],
+        )
+    );
+    $user_id = wp_insert_user(wp_slash($userdata));
 }
 
 
@@ -101,33 +105,15 @@ if (!empty($errors)) {
     echo '</ul>';
 }
 ?>
-<div class="col-7 border my-3 mx-auto p-3 card">
+<div class="col-12 border my-3 mx-auto p-3 card">
     <h4 class="mb-3">Créer un compte :</h4>
-    <form class="needs-validation" method="post" novalidate>
-        <fieldset class="my-3">
+    <form class="needs-validation" method="post">
+        <fieldset>
             <div class="row g-3">
-                <h6>Informations de compte : </h6>
                 <div class="row g-2 mb-2">
+                    <h6>Informations de compte (*) : </h6>
                     <div class="row g-2">
-                        <div class="col-md-4">
-                            <label for="firstName" class="form-label">Prénom :</label>
-                            <input type="text" value="<?= $_POST['firstname'] ?>" class="form-control" name="firstname" id="firstname" required>
-                            <div class="invalid-feedback">
-                                Champ invalide : minimum 2 caractères alphabétiques.
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="lastName" class="form-label">Nom :</label>
-                            <input type="text" class="form-control" value="<?= $_POST['lastname'] ?>" name="lastname" id="lastname" required>
-                            <div class="invalid-feedback">
-                                Champ invalide : minimum 2 caractères alphabétiques.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row g-2">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <label for="username" class="form-label">Identifiant :</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text">@</span>
@@ -140,15 +126,15 @@ if (!empty($errors)) {
                     </div>
 
                     <div class="row g-2">
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                             <label for="firstName" class="form-label">Mot de passe :</label>
                             <input type="password" class="form-control" autocomplete="off" value="<?= $_POST['password1'] ?>" name="password1" id="password1" required>
                             <div class="invalid-feedback">
-                                Le mot de passe doit contenir au minimum : une minuscule, une majuscule, un symbole et un chiffre.
+                                Le mot de passe doit contenir au minimum 8 caractères, une minuscule, une majuscule et un chiffre.
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            <label for="firstName" class="form-label">Vétification de votre mot de passe :</label>
+                        <div class="col-md-3">
+                            <label for="firstName" class="form-label">Vétification du mot de passe :</label>
                             <input type="password" class="form-control" autocomplete="off" value="<?= $_POST['password2'] ?>" name="password2" id="password2" required>
                             <div class="invalid-feedback">
                                 Les mots de passe doivent être identiques.
@@ -157,7 +143,7 @@ if (!empty($errors)) {
                     </div>
 
                     <div class="row g-2">
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             <label for="email" class="form-label">Email :</label>
                             <input type="email" class="form-control" value="<?= $_POST['email'] ?>" name="email" id="email" required>
                             <div class="invalid-feedback">
@@ -169,23 +155,60 @@ if (!empty($errors)) {
                 </div>
 
                 <div class="row g-2 mb-2">
-                    <h6>Informations de personelles : </h6>
+                    <h6>Informations personelles (*) : </h6>
+
                     <div class="row g-2">
-                        <div class="col-md-4">
-                            <label for="city" class="form-label">Ville :</label>
-                            <input type="text" value="<?= $_POST['city'] ?>" class="form-control" name="city" id="city">
+                        <div class="col-md-3">
+                            <label for="firstName" class="form-label">Prénom :</label>
+                            <input type="text" value="<?= $_POST['firstname'] ?>" class="form-control" name="firstname" id="firstname" required>
+                            <div class="invalid-feedback">
+                                Champ invalide : minimum 2 caractères alphabétiques.
+                            </div>
                         </div>
 
-                        <div class="col-md-8">
-                            <label for="street" class="form-label">Rue :</label>
-                            <input type="text" value="<?= $_POST['street'] ?>" class="form-control" name="street" id="street">
+                        <div class="col-md-3">
+                            <label for="lastName" class="form-label">Nom :</label>
+                            <input type="text" class="form-control" value="<?= $_POST['lastname'] ?>" name="lastname" id="lastname" required>
+                            <div class="invalid-feedback">
+                                Champ invalide : minimum 2 caractères alphabétiques.
+                            </div>
                         </div>
                     </div>
 
                     <div class="row g-2">
+                        <div class="col-md-2">
+                            <label for="gender" class="form-label">Genre :</label>
+                            <select name="gender" class="form-select" id="gender" required>
+                                <option value="M" <?= $_POST['gender'] == 'M' ? 'selected' : '' ?>>Homme</option>
+                                <option value="F" <?= $_POST['gender'] == 'F' ? 'selected' : '' ?>>Femme</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-md-2">
+                            <label for="birthday" class="form-label">Date de naissance :</label>
+                            <input type="date" value="<?= $_POST['birthday'] ?>" class="form-control" name="birthday" id="birthday" required>
+                        </div>
+
+                    </div>
+                    <div class="row g-2">
+                        <p>Adresse :</p>
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">Ville :</label>
+                            <input type="text" value="<?= $_POST['city'] ?>" class="form-control" name="city" id="city" required>
+                        </div>
+
                         <div class="col-md-4">
+                            <label for="street" class="form-label">Rue :</label>
+                            <input type="text" value="<?= $_POST['street'] ?>" class="form-control" name="street" id="street" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-md-3">
                             <label for="phone" class="form-label">Numéro de téléphone :</label>
-                            <input type="text" value="<?= $_POST['phone'] ?>" class="form-control" name="phone" id="phone">
+                            <input type="text" value="<?= $_POST['phone'] ?>" class="form-control" name="phone" id="phone" required>
                         </div>
                     </div>
                 </div>
@@ -193,31 +216,41 @@ if (!empty($errors)) {
                 <div class="row g-2 mb-2">
                     <h6>Personne à prévenir en cas de problème : </h6>
                     <div class="row g-2">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="firstNameTrust" class="form-label">Prénom :</label>
                             <input type="text" value="<?= $_POST['firstNameTrust'] ?>" class="form-control" name="firstNameTrust" id="firstNameTrust">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="lastNameTrust" class="form-label">Nom :</label>
                             <input type="text" value="<?= $_POST['lastNameTrust'] ?>" class="form-control" name="lastNameTrust" id="lastNameTrust">
                         </div>
                     </div>
 
                     <div class="row g-2">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="phoneTrust" class="form-label">Numéro de téléphone :</label>
                             <input type="text" value="<?= $_POST['phoneTrust'] ?>" class="form-control" name="phoneTrust" id="phoneTrust">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="linkTrust" class="form-label">Lien de parenté :</label>
                             <input type="text" value="<?= $_POST['linkTrust'] ?>" class="form-control" name="linkTrust" id="linkTrust">
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="row g-2 mb-2">
+                    <h6>Droit à l'image (*) :</h6>
+                    <label for="allow-photo" class="form-label">J'autorise la publication de mon image sur ce site ainsi que sur les réseaux sociaux liés au club :</label>
+                    <div class="col-md-1">
+                        <select name="allow-photo" class="form-select" id="allow-photo" required>
+                            <option value="1" <?= $_POST['allow-photo'] == '1' ? 'selected' : '' ?>>Oui</option>
+                            <option value="0" <?= $_POST['allow-photo'] == '0' ? 'selected' : '' ?>>Non</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </fieldset>
 
         <button class="btn btn-primary my-3" type="submit">Créer le compte</button>

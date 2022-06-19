@@ -33,8 +33,8 @@ jQuery('.needs-validation input').on('blur', function() {
         if (validator.isStrongPassword(this.value, {
             minLowercase: 1,
             minUppercase: 1,
-            minNumbers: 1,
-            minSymbols: 1
+            minSymbols: 0,
+            minNumbers: 1
         })) {
             jQuery(this).addClass('is-valid')
             jQuery(this).removeClass('is-invalid')
@@ -47,12 +47,7 @@ jQuery('.needs-validation input').on('blur', function() {
         }
     }
     if(this.id == 'password2') {
-        if (jQuery(this).val() === jQuery('#password1').val() && validator.isStrongPassword(this.value, {
-            minLowercase: 1,
-            minUppercase: 1,
-            minNumbers: 1,
-            minSymbols: 1
-        })) {
+        if (jQuery(this).val() === jQuery('#password1').val()) {
             jQuery(this).addClass('is-valid')
             jQuery(this).removeClass('is-invalid')
         }
