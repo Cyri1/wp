@@ -9,8 +9,13 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100 bg-light">
-    <div class="bg-white border">
-        <nav class="container navbar navbar-expand-lg navbar-light">
+    <div>
+        <div class="bg-primary">
+            <div class="container">
+                <img src="<?= get_template_directory_uri(); ?>/assets/logo.png" width="600" height="200" alt="logo">
+            </div>
+        </div>
+        <nav class="container navbar navbar-expand-lg navbar-light bg-white border-bottom border-primary border-2 shadow-sm">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#primaryNav" aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,7 +27,6 @@
                     </div>
                     <div class="offcanvas-body">
                         <a class="navbar-brand d-none d-lg-inline-flex" href="<?= network_site_url('/') ?>">
-                            <?= get_bloginfo('name') ?>
                         </a>
                         <?php
                         wp_nav_menu([
@@ -67,7 +71,6 @@
                                 </div>
                             </li>
                         </ul>
-                        <?php get_search_form(); ?>
                     </div>
                 </div>
             </div>

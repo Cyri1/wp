@@ -5,6 +5,13 @@ add_action('after_setup_theme', 'tm_supports');
 add_action('wp_enqueue_scripts', 'tm_register_assets');
 add_action('admin_enqueue_scripts', 'tm_register_admin_assets');
 add_action('wp_login_failed', 'tm_login_failed');
+add_action('wp_authenticate', 'tm_login_empty', 1, 2);
+
+add_filter('auth_cookie_expiration', 'keep_me_logged_in_for_1_year');
+function keep_me_logged_in_for_1_year($expirein)
+{
+    return YEAR_IN_SECONDS; // 1 year in seconds
+}
 
 function tm_init()
 {
@@ -32,6 +39,7 @@ function tm_supports()
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     add_theme_support('menus');
+    add_image_size('mini_sponsors', 9999, 70, false);
 }
 
 function tm_register_assets()
@@ -69,6 +77,14 @@ function tm_login_failed()
     }
 }
 
+function tm_login_empty($username, $pwd)
+{
+    if (empty($username) || empty($pwd)) {
+        wp_safe_redirect(home_url());
+        exit();
+    }
+}
+
 require_once('functions/navbar/navbar.php');
 require_once('functions/excerpt/excerpt.php');
 require_once('functions/metaboxes/custom.php');
@@ -77,6 +93,7 @@ require_once('functions/pagination/pagination.php');
 require_once('functions/filter-posts/filter.php');
 require_once('functions/widgets/sidebar.php');
 require_once('functions/widgets/custom.php');
+require_once('functions/widgets/sponsors.php');
 require_once('functions/comments/comments.php');
 require_once('functions/appearance/appearance.php');
 require_once('functions/cron/cron.php');

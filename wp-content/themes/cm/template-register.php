@@ -193,16 +193,15 @@ if (!empty($errors)) {
 
                     </div>
                     <div class="row g-2">
-                        <p>Adresse :</p>
-                        <div class="col-md-3">
-                            <label for="city" class="form-label">Ville :</label>
-                            <input type="text" value="<?= $_POST['city'] ?>" class="form-control" name="city" id="city" required>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="street" class="form-label">Rue :</label>
-                            <input type="text" value="<?= $_POST['street'] ?>" class="form-control" name="street" id="street" required>
-                        </div>
+                        <p class="mb-0 ">Adresse :</p>
+                            <div class="col-md-3 ms-3">
+                                <label for="city" class="form-label">Ville :</label>
+                                <input type="text" value="<?= $_POST['city'] ?>" class="form-control" name="city" id="city" required>
+                            </div>
+                            <div class="col-md-4 ms-3">
+                                <label for="street" class="form-label">Rue :</label>
+                                <input type="text" value="<?= $_POST['street'] ?>" class="form-control" name="street" id="street" required>
+                            </div>
                     </div>
 
                     <div class="row g-2">

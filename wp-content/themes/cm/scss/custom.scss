@@ -1,4 +1,9 @@
 //sass .\custom.scss ..\css\bootstrap.css --watch
-$primary: #5c5c5c;
+$primary: #c2241e;
 $nav-tabs-border-radius: 25px;
+$dropdown-border-color: #c2241e;
+$dropdown-link-hover-color: white;
+$dropdown-link-hover-bg: #c2241e;
+$dropdown-min-width: 220px;
+$navbar-light-active-color: #c2241e;
 @import 'bootstrap/bootstrap.scss';
