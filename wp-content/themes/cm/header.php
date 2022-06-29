@@ -51,7 +51,7 @@
                                     <?php else : ?>
                                     <form class="px-4 py-3" name="loginform" id="loginform" action="<?= wp_login_url() ?>" method="post">
                                         <div class="mb-3">
-                                            <label for="exampleDropdownFormEmail1" class="form-label">Identifiant ou e-mail :</label>
+                                            <label for="exampleDropdownFormEmail1" class="form-label">E-mail :</label>
                                             <input name="log" class="form-control" id="exampleDropdownFormEmail1">
                                         </div>
                                         <div class="mb-3">

@@ -4,8 +4,7 @@ add_action('init', 'tm_init');
 add_action('after_setup_theme', 'tm_supports');
 add_action('wp_enqueue_scripts', 'tm_register_assets');
 add_action('admin_enqueue_scripts', 'tm_register_admin_assets');
-add_action('wp_login_failed', 'tm_login_failed');
-add_action('wp_authenticate', 'tm_login_empty', 1, 2);
+
 
 add_filter('auth_cookie_expiration', 'keep_me_logged_in_for_1_year');
 function keep_me_logged_in_for_1_year($expirein)
@@ -68,24 +67,9 @@ function tm_register_admin_assets()
     wp_enqueue_style('tm_custom_admin_css', get_template_directory_uri() . '/css/custom-admin.css');
 }
 
-function tm_login_failed()
-{
-    $referrer = $_SERVER['HTTP_REFERER'];
-    if (!empty($referrer) && !strstr($referrer, 'wp-login') && !strstr($referrer, 'wp-admin')) {
-        $param = strpos('?login=failed', $_SERVER['REQUEST_URI']) ? '' : '?login=failed';
-        wp_redirect(home_url() . $param);
-        exit;
-    }
-}
 
-function tm_login_empty($username, $pwd)
-{
-    if (empty($username) || empty($pwd)) {
-        wp_safe_redirect(home_url());
-        exit();
-    }
-}
 
+require_once('functions/login/login.php');
 require_once('functions/navbar/navbar.php');
 require_once('functions/excerpt/excerpt.php');
 require_once('functions/metaboxes/custom.php');
