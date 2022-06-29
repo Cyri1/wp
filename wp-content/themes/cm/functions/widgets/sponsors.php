@@ -30,7 +30,7 @@ class widget_sponsors extends WP_Widget
         echo '<div class="text-center mx-auto">';
         while ($loop->have_posts()) {
             $loop->the_post();
-            the_post_thumbnail('mini_sponsors');
+            the_post_thumbnail('mini_image');
         }
         echo '</div>';
         echo $args['after_widget'];

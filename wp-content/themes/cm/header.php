@@ -12,7 +12,7 @@
     <div>
         <div class="bg-primary">
             <div class="container">
-                <img src="<?= get_template_directory_uri(); ?>/assets/logo.png" width="600" height="200" alt="logo">
+                <img class="img-fluid" src="<?= get_template_directory_uri(); ?>/assets/logo.png" width="600" height="200" alt="logo">
             </div>
         </div>
         <nav class="container navbar navbar-expand-lg navbar-light bg-white border-bottom border-primary border-2 shadow-sm">
@@ -45,6 +45,10 @@
                                     Mon compte
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
+                                <?php if (is_user_logged_in()) : ?>
+                                    <a class="dropdown-item" href="<?= esc_url(home_url('/mes-informations')) ?>">Mes informations</a>
+                                    <a class="dropdown-item" href="<?= wp_logout_url(get_permalink()) ?>')) ?>">Se déconnecter</a>
+                                    <?php else : ?>
                                     <form class="px-4 py-3" name="loginform" id="loginform" action="<?= wp_login_url() ?>" method="post">
                                         <div class="mb-3">
                                             <label for="exampleDropdownFormEmail1" class="form-label">Identifiant ou e-mail :</label>
@@ -64,10 +68,12 @@
                                         <button type="submit" class="btn btn-primary">Se connecter</button>
                                     </form>
                                     <div class="dropdown-divider"></div>
+
                                     <a class="dropdown-item" href="<?= esc_url(home_url('/creer-un-compte')) ?>">Créer un compte</a>
                                     <a class="dropdown-item" href="<?php echo esc_url(wp_lostpassword_url(get_home_url())); ?>" alt="<?php esc_attr_e('Lost Password', 'textdomain'); ?>">
                                         <?php esc_html_e('Lost Password', 'textdomain'); ?>
                                     </a>
+                                    <?php endif; ?>
                                 </div>
                             </li>
                         </ul>

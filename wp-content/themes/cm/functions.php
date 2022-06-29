@@ -39,7 +39,8 @@ function tm_supports()
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     add_theme_support('menus');
-    add_image_size('mini_sponsors', 9999, 70, false);
+    add_image_size('mini_image', 9999, 70, false);
+    add_image_size('maxi_image', 9999, 150, false);
 }
 
 function tm_register_assets()
