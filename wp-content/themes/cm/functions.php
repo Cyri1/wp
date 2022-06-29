@@ -1,6 +1,5 @@
 <?php
 
-add_action('init', 'tm_init');
 add_action('after_setup_theme', 'tm_supports');
 add_action('wp_enqueue_scripts', 'tm_register_assets');
 add_action('admin_enqueue_scripts', 'tm_register_admin_assets');
@@ -10,27 +9,6 @@ add_filter('auth_cookie_expiration', 'keep_me_logged_in_for_1_year');
 function keep_me_logged_in_for_1_year($expirein)
 {
     return YEAR_IN_SECONDS; // 1 year in seconds
-}
-
-function tm_init()
-{
-    register_taxonomy('custom_taxonomy', 'post', [
-        'labels' => [
-            'name' => 'Custom Taxonomy',
-            'singular_name' => 'Custom Taxonomy',
-            'plural_name' => 'Custom Taxonomies',
-            'search_items' => 'Rechercher Taxonomy',
-            'all_items' => 'Toutes les Taxonomies',
-            'edit_item' => 'Editer la Taxonomy',
-            'update_item' => 'Mettre à jour la Taxonomy',
-            'add_new_item' => 'Ajouter une nouvelle Taxonomy (item)',
-            'new_item_name' => 'Ajouter une nouvelle Taxonomy (name)',
-            'menu_name' => 'Custom Taxonomy',
-        ],
-        'show_in_rest' => true,
-        'hierarchical' => true,
-        'show_admin_column' => true,
-    ]);
 }
 
 function tm_supports()
@@ -80,6 +58,5 @@ require_once('functions/widgets/sidebar.php');
 require_once('functions/widgets/custom.php');
 require_once('functions/widgets/sponsors.php');
 require_once('functions/comments/comments.php');
-require_once('functions/appearance/appearance.php');
 require_once('functions/cron/cron.php');
 require_once('functions/wpdb/wpdb.php');

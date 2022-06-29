@@ -7,13 +7,6 @@
 ?>
 
 <?php
-if (is_user_logged_in()) {
-    wp_safe_redirect(home_url());
-}
-get_header();
-?>
-
-<?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = [];
     if (!isset($_POST['registration_nonce']) || !wp_verify_nonce($_POST['registration_nonce'], 'user_registration')) {
@@ -87,6 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
     $user_id = wp_insert_user(wp_slash($userdata));
 }
+
+if (is_user_logged_in()) {
+    wp_safe_redirect(home_url());
+}
+get_header();
 
 if (!empty($errors)) {
     echo '<ul class="alert alert-danger py-1 list-unstyled w-50 m-auto">';

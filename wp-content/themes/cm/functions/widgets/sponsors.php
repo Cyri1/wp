@@ -26,7 +26,7 @@ class widget_sponsors extends WP_Widget
             'posts_per_page' => -1,
         );
         $loop = new WP_Query($postArgs);
-        echo '<div><strong>Sponsors du club : </strong></div>';
+        echo '<div><strong>Partenaires du club : </strong></div>';
         echo '<div class="text-center mx-auto">';
         while ($loop->have_posts()) {
             $loop->the_post();

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Template Name: Page de création de compte
+ * Template Name: Page mes informations
  * Template Post Type: page
  */
 ?>
 
 <?php
-if (is_user_logged_in()) {
+if (!is_user_logged_in()) {
     wp_safe_redirect(home_url());
 }
 get_header();
@@ -28,7 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (strlen($_POST['lastname']) < 1 || preg_match('/[#$%^&*()+=\\[\];.\/{}|":<>?~\\\\]/', $_POST['lastname'])) {
         $errors[] = 'Le nom n\'est pas valide.';
     }
-    if (email_exists($_POST['email'])) {
+
+    if (email_exists($_POST['email']) !== get_current_user_id()) {
         $errors[] = 'L\'addresse email éxiste déjà.';
     }
     if (
@@ -89,7 +90,7 @@ if (!empty($errors)) {
                     <div class="row g-2">
                         <div class="col-md-4">
                             <label for="email" class="form-label">Email :</label>
-                            <input type="email" class="form-control" value="<?= $userId->email ?>" name="email" id="email" required>
+                            <input type="email" class="form-control" value="<?= $userId->user_email ?>" name="email" id="email" required>
                             <div class="invalid-feedback">
                                 L'email n'est pas valide.
                             </div>

@@ -30,7 +30,7 @@ function tm_login_empty($username, $pwd)
 }
 
 
-do_action( 'user_register', 'tm_user_created');
+add_action( 'user_register', 'tm_user_created');
 add_action('wp_login_failed', 'tm_login_failed');
 add_action('wp_login', 'tm_login_successful');
 add_action('wp_authenticate', 'tm_login_empty', 1, 2);

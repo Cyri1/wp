@@ -1,11 +1,9 @@
 <div class="card my-3 shadow-sm">
     <div class="mx-3">
         <h4 class="card-title mt-3"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h4>
-        <?php $taxonomies = get_the_terms(get_the_ID(), 'custom_taxonomy') ? get_the_terms(get_the_ID(), 'custom_taxonomy') : []; ?>
+        <?php $taxonomies = get_the_terms(get_the_ID(), 'category') ? get_the_terms(get_the_ID(), 'category') : []; ?>
         <?php foreach ($taxonomies as $taxonomy) : ?>
-            <a href="<?= get_term_link($taxonomy) ?>"><span class="badge rounded-pill bg-success"><?= $taxonomy->name ?></span></a>
-
-            
+            <a href="<?= get_term_link($taxonomy) ?>"><span class="badge rounded-pill bg-secondary"><?= $taxonomy->name ?></span></a>
         <?php endforeach; ?>
     </div>
     <div class="row m-0">
@@ -19,6 +17,6 @@
         </div>
     </div>
     <div class="card-footer">
-        <small class="text-muted">Last updated XXXX</small>
+        <small class="text-muted"><?= get_the_modified_date(); ?></small>
     </div>
 </div>
