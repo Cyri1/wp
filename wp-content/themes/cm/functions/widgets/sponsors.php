@@ -26,11 +26,11 @@ class widget_sponsors extends WP_Widget
             'posts_per_page' => -1,
         );
         $loop = new WP_Query($postArgs);
-        echo '<div><strong>Partenaires du club : </strong></div>';
+        echo '<div class="mt-2"><strong>Partenaires du club : </strong></div>';
         echo '<div class="text-center mx-auto">';
         while ($loop->have_posts()) {
             $loop->the_post();
-            the_post_thumbnail('mini_image');
+            the_post_thumbnail('mini_image', array('class' => 'm-1'));
         }
         echo '</div>';
         echo $args['after_widget'];
